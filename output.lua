@@ -1,6 +1,9 @@
-local function displayMessagesOnMonitor()
+-- output.lua
+local M = {}  -- Create a table to hold the functions
+
+function M.displayMessagesOnMonitor()
     rednet.open("bottom")
-    local monitor = peripheral.find(monitor)
+    local monitor = peripheral.find("monitor")
 
     if not monitor then
         print("Monitor not found.")
@@ -21,7 +24,6 @@ local function displayMessagesOnMonitor()
             table.insert(lines, line)
         end
 
-        -- Display the lines on the monitor
         for _, line in ipairs(lines) do
             monitor.write(line)
             monitor.setCursorPos(1, select(2, monitor.getCursorPos()) + 1)
@@ -30,3 +32,5 @@ local function displayMessagesOnMonitor()
 
     rednet.close("bottom")
 end
+
+return M
